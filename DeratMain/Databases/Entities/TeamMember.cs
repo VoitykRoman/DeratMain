@@ -17,16 +17,15 @@ namespace DeratMain.Databases.Entities
             Phone = teamMemberCreateModel.Phone;
             Experience = teamMemberCreateModel.Experience;
         }
+
+        public TeamMember()
+        {
+        }
         public string Name { get; set; }
         public int Age { get; set; }
         public string Position { get; set; }
         public string Phone { get; set; }
         public int Experience { get; set; }
 
-        public static void Configure(ModelBuilder modelBuilder)
-        {
-            var entity = modelBuilder.Entity<TeamMember>();
-            entity.HasKey(e => e.Id);
-        }
     }
 }

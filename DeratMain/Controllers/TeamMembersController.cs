@@ -1,15 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DeratMain.Interfaces.Services;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DeratMain.Controllers
 {
-    [Route("controller")]
+    [Route("[controller]")]
     [ApiController]
     public class TeamMembersController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly ITeamMemberService _teamMemberService;
+
+        public TeamMembersController(ITeamMemberService teamMemberService)
         {
-            return Ok(true);
+            _teamMemberService = teamMemberService;
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetTeamMembers()
+        {
+            return Ok(await _teamMemberService.GetAllTeamMembersAsync());
         }
     }
 }

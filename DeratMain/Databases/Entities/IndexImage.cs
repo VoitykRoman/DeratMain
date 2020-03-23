@@ -10,10 +10,5 @@ namespace DeratMain.Databases.Entities
     {
         public string ImageUrl { get; set; }
 
-        public static void Configure(ModelBuilder modelBuilder)
-        {
-            var entity = modelBuilder.Entity<IndexImage>();
-            entity.HasKey(e => e.Id);
-        }
     }
 }

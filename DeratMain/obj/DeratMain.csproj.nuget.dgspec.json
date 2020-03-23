@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\voyti\\source\\repos\\DeratMain\\DeratMain\\DeratMain.csproj": {}
+    "D:\\projects\\DeratMain\\DeratMain\\DeratMain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\voyti\\source\\repos\\DeratMain\\DeratMain\\DeratMain.csproj": {
+    "D:\\projects\\DeratMain\\DeratMain\\DeratMain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\voyti\\source\\repos\\DeratMain\\DeratMain\\DeratMain.csproj",
+        "projectUniqueName": "D:\\projects\\DeratMain\\DeratMain\\DeratMain.csproj",
         "projectName": "DeratMain",
-        "projectPath": "C:\\Users\\voyti\\source\\repos\\DeratMain\\DeratMain\\DeratMain.csproj",
+        "projectPath": "D:\\projects\\DeratMain\\DeratMain\\DeratMain.csproj",
         "packagesPath": "C:\\Users\\voyti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\voyti\\source\\repos\\DeratMain\\DeratMain\\obj\\",
+        "outputPath": "D:\\projects\\DeratMain\\DeratMain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -57,6 +57,14 @@
               "target": "Package",
               "version": "[2.2.0, )",
               "autoReferenced": true
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.2.0, )"
             }
           },
           "imports": [

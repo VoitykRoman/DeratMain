@@ -1,4 +1,5 @@
-﻿using DeratMain.Databases.Entities;
+﻿using DeratMain.Databases.Configuration;
+using DeratMain.Databases.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DeratMain.Databases
@@ -13,12 +14,16 @@ namespace DeratMain.Databases
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public MainDbContext()
         {
             Database.EnsureCreated();
+        }
 
-            TeamMember.Configure(modelBuilder);
-            IndexImage.Configure(modelBuilder);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new IndexImageConfiguration());
+            modelBuilder.ApplyConfiguration(new TeamMemberConfiguration());
+            
         }
     }
 }

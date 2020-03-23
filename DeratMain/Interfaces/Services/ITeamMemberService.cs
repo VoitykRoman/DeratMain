@@ -13,6 +13,6 @@ namespace DeratMain.Interfaces.Services
 
         Task<TeamMember> GetTeamMemberAsync(int id);
 
-        Task AddTeamMemberAsync(TeamMemberCreateModel teamMember);
+        Task AddTeamMemberAsync(TeamMemberCreateModel teamMemberModel);
     }
 }
