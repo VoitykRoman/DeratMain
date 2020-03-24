@@ -22,9 +22,9 @@ namespace DeratMain.Services
             await _teamMemberRepository.AddTeamMemberAsync(teamMember);
         }
 
-        public Task<IEnumerable<TeamMember>> GetAllTeamMembersAsync()
+        public async Task<IEnumerable<TeamMember>> GetAllTeamMembersAsync()
         {
-            throw new NotImplementedException();
+            return await _teamMemberRepository.GetAllTeamMembersAsync();
         }
 
         public Task<TeamMember> GetTeamMemberAsync(int id)

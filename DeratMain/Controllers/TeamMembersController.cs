@@ -1,4 +1,5 @@
 ﻿using DeratMain.Interfaces.Services;
+using DeratMain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -18,6 +19,13 @@ namespace DeratMain.Controllers
         public async Task<IActionResult> GetTeamMembers()
         {
             return Ok(await _teamMemberService.GetAllTeamMembersAsync());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]TeamMemberCreateModel model )
+        {
+            await _teamMemberService.AddTeamMemberAsync(model);
+            return NoContent();
         }
     }
 }

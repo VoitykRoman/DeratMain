@@ -31,6 +31,8 @@ namespace DeratMain
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddDbContext<MainDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
@@ -55,6 +57,7 @@ namespace DeratMain
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
