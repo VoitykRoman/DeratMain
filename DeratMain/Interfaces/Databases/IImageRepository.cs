@@ -11,5 +11,11 @@ namespace DeratMain.Interfaces.Databases
         Task<IEnumerable<IndexImage>> GetAllImagesAsync();
 
         Task AddImageAsync(IndexImage image);
+
+        Task UpdateImageAsync(IndexImage image);
+
+        Task<IndexImage> GetIndexImageAsync(int id);
+
+        Task DeleteIndexImageAsync(int id);
     }
 }

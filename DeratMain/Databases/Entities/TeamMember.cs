@@ -15,7 +15,7 @@ namespace DeratMain.Databases.Entities
             ImageUrl = teamMemberCreateModel.ImageUrl;
         }
 
-        public TeamMember()
+        public TeamMember() : base()
         {
         }
         public string Name { get; set; }

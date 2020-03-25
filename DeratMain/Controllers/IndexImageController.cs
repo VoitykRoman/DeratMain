@@ -1,8 +1,6 @@
 ﻿using DeratMain.Interfaces.Services;
+using DeratMain.Models.IndexImage;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DeratMain.Controllers
@@ -24,10 +22,30 @@ namespace DeratMain.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromQuery]string url)
+        public async Task<IActionResult> Post(IndexImageCreateModel indexImage)
         {
-            await _indexImageService.AddIndexImage(url);
+            await _indexImageService.AddIndexImage(indexImage);
             return NoContent();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(IndexImageUpdateModel indexImage)
+        {
+            await _indexImageService.UpdateImageAsync(indexImage);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromQuery]int id)
+        {
+            await _indexImageService.DeleteIndexImageAsync(id);
+            return NoContent();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            return Ok(await _indexImageService.GetIndexImageAsync(id));
         }
     }
 }

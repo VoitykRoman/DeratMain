@@ -1,4 +1,5 @@
 ﻿using DeratMain.Databases.Entities;
+using DeratMain.Models.IndexImage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,12 @@ namespace DeratMain.Interfaces.Services
     {
         Task<IEnumerable<IndexImage>> GetAllIndexImages();
 
-        Task AddIndexImage(string url);
+        Task AddIndexImage(IndexImageCreateModel indexImage);
+
+        Task UpdateImageAsync(IndexImageUpdateModel image);
+
+        Task<IndexImage> GetIndexImageAsync(int id);
+
+        Task DeleteIndexImageAsync(int id);
     }
 }
