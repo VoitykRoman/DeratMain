@@ -12,5 +12,9 @@ namespace DeratMain.Interfaces.Databases
         Task<TeamMember> GetTeamMemberAsync(int id);
 
         Task AddTeamMemberAsync(TeamMember teamMember);
+
+        Task UpdateTeamMemberAsync(TeamMember teamMember);
+
+        Task DeleteTeamMemberAsync(int id);
     }
 }

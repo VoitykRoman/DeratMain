@@ -1,8 +1,7 @@
 ﻿using DeratMain.Databases.Entities;
 using DeratMain.Models;
-using System;
+using DeratMain.Models.TeamMember;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DeratMain.Interfaces.Services
@@ -14,5 +13,9 @@ namespace DeratMain.Interfaces.Services
         Task<TeamMember> GetTeamMemberAsync(int id);
 
         Task AddTeamMemberAsync(TeamMemberCreateModel teamMemberModel);
+
+        Task UpdateTeamMemberAsync(TeamMemberUpdateModel teamMemberModel);
+
+        Task DeleteTeamMemberAsync(int id);
     }
 }

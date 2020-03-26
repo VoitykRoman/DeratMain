@@ -6,7 +6,7 @@ namespace DeratMain.Databases.Entities
     {
         public BaseEntity()
         {
-            CreatedAt = new DateTime().Date;
+            CreatedAt = DateTime.Now;
             IsDeleted = false;
         }
         public virtual int Id { get; set; }

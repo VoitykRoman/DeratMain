@@ -1,5 +1,6 @@
 ﻿using DeratMain.Interfaces.Services;
 using DeratMain.Models;
+using DeratMain.Models.TeamMember;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -27,5 +28,26 @@ namespace DeratMain.Controllers
             await _teamMemberService.AddTeamMemberAsync(model);
             return NoContent();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody]TeamMemberUpdateModel model)
+        {
+            await _teamMemberService.UpdateTeamMemberAsync(model);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromQuery]int id)
+        {
+            await _teamMemberService.DeleteTeamMemberAsync(id);
+            return NoContent();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            return Ok(await _teamMemberService.GetTeamMemberAsync(id));
+        }
+
     }
 }
