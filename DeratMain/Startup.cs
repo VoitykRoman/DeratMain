@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DeratMain.Databases;
+﻿using DeratMain.Databases;
 using DeratMain.Databases.Repositories;
 using DeratMain.Interfaces.Databases;
 using DeratMain.Interfaces.Services;
 using DeratMain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,9 +36,10 @@ namespace DeratMain
 
             services.AddScoped<IImageRepository, ImageRepository>();
             services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
+            services.AddScoped<ILicenseRepository, LicenseRepository>();
             services.AddScoped<IIndexImageService, IndexImageService>();
             services.AddScoped<ITeamMemberService, TeamMemberService>();
-
+            services.AddScoped<ILicenseService, LicenseService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
