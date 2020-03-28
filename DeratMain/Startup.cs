@@ -37,9 +37,11 @@ namespace DeratMain
             services.AddScoped<IImageRepository, ImageRepository>();
             services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
             services.AddScoped<ILicenseRepository, LicenseRepository>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IIndexImageService, IndexImageService>();
             services.AddScoped<ITeamMemberService, TeamMemberService>();
             services.AddScoped<ILicenseService, LicenseService>();
+            services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });

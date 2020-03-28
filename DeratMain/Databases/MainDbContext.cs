@@ -9,8 +9,8 @@ namespace DeratMain.Databases
 
         public virtual DbSet<TeamMember> TeamMembers { get; set; }
         public virtual DbSet<IndexImage> IndexImages { get; set; }
-
         public virtual DbSet<License> Licenses { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
         public MainDbContext(DbContextOptions<MainDbContext> options) : base(options)
         {
         }
@@ -25,6 +25,7 @@ namespace DeratMain.Databases
             modelBuilder.ApplyConfiguration(new IndexImageConfiguration());
             modelBuilder.ApplyConfiguration(new TeamMemberConfiguration());
             modelBuilder.ApplyConfiguration(new LicenseConfiguration());
+            modelBuilder.ApplyConfiguration(new FeedbackConfiguration());
         }
     }
 }
