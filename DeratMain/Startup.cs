@@ -26,7 +26,18 @@ namespace DeratMain
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                    });
+            });
 
             services.AddDbContext<MainDbContext>(options =>
             {
@@ -38,10 +49,13 @@ namespace DeratMain
             services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
             services.AddScoped<ILicenseRepository, LicenseRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+            services.AddScoped<ICallbackRepository, CallbackRepository>();
             services.AddScoped<IIndexImageService, IndexImageService>();
             services.AddScoped<ITeamMemberService, TeamMemberService>();
             services.AddScoped<ILicenseService, LicenseService>();
             services.AddScoped<IFeedbackService, FeedbackService>();
+            services.AddScoped<ICallbackService, CallbackService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -55,7 +69,7 @@ namespace DeratMain
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseCors("AllowAll");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

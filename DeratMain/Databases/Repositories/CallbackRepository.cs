@@ -8,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace DeratMain.Databases.Repositories
 {
-    public class FeedbackRepository : IFeedbackRepository
+    public class CallbackRepository : ICallbackRepository
     {
         private readonly MainDbContext _dbContext;
 
-        public FeedbackRepository(MainDbContext dbContext)
+        public CallbackRepository(MainDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
 
-        public async Task AddFeedbackAsync(Feedback feedback)
+        public async Task AddCallbackAsync(Callback Callback)
         {
-            await _dbContext.Feedbacks.AddAsync(feedback);
+            await _dbContext.Callbacks.AddAsync(Callback);
             await SaveChanges();
         }
 
-        public async Task DeleteFeedbackAsync(int id)
+        public async Task DeleteCallbackAsync(int id)
         {
-            var itemToDelete = await _dbContext.Feedbacks
+            var itemToDelete = await _dbContext.Callbacks
                 .FirstOrDefaultAsync(l => l.Id == id);
 
             itemToDelete.IsDeleted = true;
             await SaveChanges();
         }
 
-        public async Task<IEnumerable<Feedback>> GetAllFeedbacksAsync()
+        public async Task<IEnumerable<Callback>> GetAllCallbacksAsync()
         {
-            return await _dbContext.Feedbacks
+            return await _dbContext.Callbacks
                 .Where(l => !l.IsDeleted).ToListAsync();
         }
 
-        public async Task<Feedback> GetFeedbackAsync(int id)
+        public async Task<Callback> GetCallbackAsync(int id)
         {
-            return await _dbContext.Feedbacks
+            return await _dbContext.Callbacks
                 .FirstOrDefaultAsync(l => l.Id == id);
         }
 
-        public async Task UpdateFeedbackAsync(Feedback feedback)
+        public async Task UpdateCallbackAsync(Callback callback)
         {
             await SaveChanges();
         }
