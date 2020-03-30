@@ -1,5 +1,6 @@
 ﻿using DeratMain.Interfaces.Services;
 using DeratMain.Models.IndexImage;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace DeratMain.Controllers
         {
             _indexImageService = indexImageService;
         }
+
         [HttpGet]
         public async Task<IActionResult> GetImages()
         {
