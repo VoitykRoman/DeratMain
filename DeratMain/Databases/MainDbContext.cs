@@ -12,6 +12,7 @@ namespace DeratMain.Databases
         public virtual DbSet<License> Licenses { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Callback> Callbacks { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public MainDbContext(DbContextOptions<MainDbContext> options) : base(options)
         {
         }
@@ -28,6 +29,7 @@ namespace DeratMain.Databases
             modelBuilder.ApplyConfiguration(new LicenseConfiguration());
             modelBuilder.ApplyConfiguration(new FeedbackConfiguration());
             modelBuilder.ApplyConfiguration(new CallbackConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
     }
 }
