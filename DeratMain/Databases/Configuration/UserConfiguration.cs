@@ -10,6 +10,7 @@ namespace DeratMain.Databases.Configuration
         {
             base.Configure(builder);
             builder.Property(e => e.Email).IsRequired();
+
         }
     }
 }

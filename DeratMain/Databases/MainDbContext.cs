@@ -1,5 +1,6 @@
 ﻿using DeratMain.Databases.Configuration;
 using DeratMain.Databases.Entities;
+using DeratMain.Databases.Entities.Logic;
 using Microsoft.EntityFrameworkCore;
 
 namespace DeratMain.Databases
@@ -13,6 +14,12 @@ namespace DeratMain.Databases
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Callback> Callbacks { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<Organization> Organizations{ get; set; }
+        public virtual DbSet<Facility> Facilities { get; set; }
+        public virtual DbSet<Perimeter> Perimeters { get; set; }
+        public virtual DbSet<Trap> Traps { get; set; }
+        public virtual DbSet<EmployeeProject> EmployeeProjects { get; set; }
         public MainDbContext(DbContextOptions<MainDbContext> options) : base(options)
         {
         }
@@ -30,6 +37,16 @@ namespace DeratMain.Databases
             modelBuilder.ApplyConfiguration(new FeedbackConfiguration());
             modelBuilder.ApplyConfiguration(new CallbackConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+
+            modelBuilder.ApplyConfiguration(new TrapConfiguration());
+            modelBuilder.ApplyConfiguration(new PerimeterConfiguration());
+            modelBuilder.ApplyConfiguration(new FacilityConfiguration());
+            modelBuilder.ApplyConfiguration(new OrganizationConfiguration());
+
+
+            var entity = modelBuilder.Entity<EmployeeProject>();
+            entity.HasKey(e => new { e.ProjectId, e.EmployeeId });
+
         }
     }
 }

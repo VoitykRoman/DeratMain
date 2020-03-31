@@ -70,7 +70,8 @@ namespace DeratMain
             {
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); ;
 
             services.AddScoped<IImageRepository, ImageRepository>();
             services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
@@ -78,6 +79,11 @@ namespace DeratMain
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<ICallbackRepository, CallbackRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<IOrganizationRepository, OrganizationRepository>();
+            services.AddScoped<IFacilityRepository, FacilityRepository>();
+            services.AddScoped<IPerimeterRepository, PerimeterRepository>();
+            services.AddScoped<ITrapRepository, TrapRepository>();
 
             services.AddScoped<IIndexImageService, IndexImageService>();
             services.AddScoped<ITeamMemberService, TeamMemberService>();
@@ -85,6 +91,12 @@ namespace DeratMain
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<ICallbackService, CallbackService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<IOrganizationService, OrganizationService>();
+            services.AddScoped<IFacilityService, FacilityService>();
+            services.AddScoped<IPerimeterService, PerimeterService>();
+            services.AddScoped<ITrapService, TrapService>();
+
             services.AddScoped<IIdentityService, IdentityService>();
 
             services.AddSwaggerGen(c =>
@@ -109,7 +121,8 @@ namespace DeratMain
             });
             app.UseAuthentication();
 
-            app.UseMvc();
+            app.UseMvc()
+                ;
 
         }
     }

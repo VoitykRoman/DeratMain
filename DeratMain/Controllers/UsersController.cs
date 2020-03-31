@@ -1,10 +1,12 @@
 ﻿using DeratMain.Interfaces.Services;
 using DeratMain.Models.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace DeratMain.Controllers
 {
+    //[Authorize(Roles = "admin")]
     [ApiController]
     public class UsersController : ControllerBase
     {
