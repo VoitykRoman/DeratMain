@@ -11,7 +11,7 @@ namespace DeratMain.Databases.Configuration
         public override void Configure(EntityTypeBuilder<Event> builder)
         {
             base.Configure(builder);
-            builder.HasOne(e => e.Project).WithMany(e => e.Events).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.Project).WithMany(e => e.Events);
         }
     }
 }

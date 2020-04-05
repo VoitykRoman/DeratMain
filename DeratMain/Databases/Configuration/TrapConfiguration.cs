@@ -12,6 +12,8 @@ namespace DeratMain.Databases.Configuration
         {
             base.Configure(builder);
             builder.HasOne(e => e.Perimeter).WithMany(e => e.Traps).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.Employee).WithMany(e => e.Traps);
         }
+
     }
 }

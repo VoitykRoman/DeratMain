@@ -29,16 +29,44 @@ namespace DeratMain.Databases.Repositories
 
         public async Task<IEnumerable<Facility>> GetAllFacilitiesAsync()
         {
-            return  await _dbContext.Facilities
+            return await _dbContext.Facilities
+                .AsNoTracking()
                 .Where(r => !r.IsDeleted)
                 .Include(e => e.Organization)
                 .Include(q => q.Perimeters)
                 .ToListAsync();
         }
 
+        public async Task<Facility> GetFacilityById(int id, int userId)
+        {
+            var user = await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(e => e.Id == userId);
+
+            if (user.Role != "employee")
+            {
+               return await _dbContext.Facilities.AsNoTracking()
+                    .Include(q => q.Perimeters).ThenInclude(e => e.Employee)
+                    .Include(w => w.Organization).ThenInclude(ww => ww.Projects).ThenInclude(www => www.EmployeesLnk).ThenInclude(t => t.Employee)
+                    .FirstOrDefaultAsync(e => e.Id == id);
+            }
+            else
+            {
+                var facility = await _dbContext.Facilities.AsNoTracking().Include(e => e.Organization).FirstOrDefaultAsync(e => e.Id == id);
+                facility.Perimeters = await _dbContext.Perimeters.AsNoTracking().Include(ee => ee.Employee).Where(e => e.Employee.Id == user.Id).ToListAsync();
+                return facility;
+            }
+        }
         private async Task SaveChanges()
         {
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteFacility(int id)
+        {
+            var facility = await _dbContext.Facilities.FirstOrDefaultAsync(e => e.Id == id);
+
+            _dbContext.Facilities.Remove(facility);
+
+            await SaveChanges();
         }
     }
 }

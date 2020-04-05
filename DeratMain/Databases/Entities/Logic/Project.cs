@@ -11,9 +11,10 @@ namespace DeratMain.Databases.Entities.Logic
             Name = projectCreateModel.Name;
             Services = projectCreateModel.Services;
             OrganizationId = projectCreateModel.OrganizationId;
-            Status = projectCreateModel.Status;
+            Status = "pending";
             Events.Add(new Event($"Project has been created by {name} at {this.CreatedAt}", this));
             this.CreatedBy = name;
+            AvatarUrl = projectCreateModel.AvatarUrl;
         }
 
         public Project() : base()
@@ -24,9 +25,10 @@ namespace DeratMain.Databases.Entities.Logic
         public string Services { get; set; }
         public int OrganizationId { get; set; }
         public Organization Organization { get; set; }
-        public ICollection<User> Employees { get; set; } = new List<User>();
+        public ICollection<EmployeeProject> EmployeesLnk { get; set; } = new List<EmployeeProject>();
         public string Status { get; set; }
         public ICollection<Event> Events { get; set; } = new List<Event>();
+        public string AvatarUrl { get; set; }
     }
 
     public class ProjectStatus

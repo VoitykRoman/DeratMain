@@ -9,16 +9,18 @@ namespace DeratMain.Interfaces.Services
     {
         Task<IEnumerable<User>> GetAllUsersAsync();
 
-        Task<User> GetUserAsync(int id);
-
         Task<User> GetUserAsync(string email, string password);
-
-        Task<IEnumerable<User>> GetUsersByRole(string role);
 
         Task AddUserAsync(UserCreateModel user);
 
-        Task UpdateUserAsync(UserUpdateModel user, int id);
+        Task<IEnumerable<User>> GetAllEmployeesAsync();
 
-        Task DeleteUserAsync(int id);
+        Task<IEnumerable<User>> GetAllClientsAsync();
+
+        Task UpdateUser(UserUpdateModel userUpdateModel);
+
+        //Task<User> GetUserById(int id);
+
+        Task DeleteUser(int id);
     }
 }

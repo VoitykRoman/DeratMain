@@ -15,6 +15,8 @@ namespace DeratMain.Databases.Configuration
             base.Configure(builder);
             builder.Property(e => e.UserName).IsRequired();
             builder.Property(e => e.Rating).IsRequired();
+            builder.HasOne(e => e.User).WithOne(e => e.Feedback);
+            //builder.HasOne(e => e.User).WithOne(e => e.Feedback).HasForeignKey(e => e.UserId).OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade);
         }
     }
 }

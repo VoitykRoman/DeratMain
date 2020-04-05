@@ -9,7 +9,7 @@ namespace DeratMain.Models.Project
         public string Services { get; set; }
         public int OrganizationId { get; set; }
         public ICollection<int> Employees { get; set; } = new List<int>();
-        public string Status { get; set; }
-    
+        public string AvatarUrl { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DeratMain.Models.Project;
+using System;
 using System.Collections.Generic;
 
 namespace DeratMain.Databases.Entities.Logic
@@ -12,6 +13,8 @@ namespace DeratMain.Databases.Entities.Logic
             Name = perimeterCreateModel.Name;
             Service = perimeterCreateModel.Service;
             CreatedBy = name;
+            Status = "pending";
+            LastAction = CreatedAt;
         }
 
         public Perimeter() : base()
@@ -24,5 +27,7 @@ namespace DeratMain.Databases.Entities.Logic
         public string Name { get; set; }
         public User Employee { get; set; }
         public string Service { get; set; }
+        public string Status { get; set; }
+        public DateTime LastAction { get; set; }
     }
 }

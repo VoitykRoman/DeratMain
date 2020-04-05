@@ -16,10 +16,27 @@ namespace DeratMain.Services
         {
             _feedbackRepository = feedbackRepository;
         }
-        public async Task AddFeedbackAsync(FeedbackCreateModel  feedbackCreateModel)
+        public async Task AddFeedbackAsync(FeedbackCreateModel feedbackCreateModel)
         {
-            var feedback = new Feedback(feedbackCreateModel);
-            await _feedbackRepository.AddFeedbackAsync(feedback);
+            var itemToUpdate = await _feedbackRepository.GetFeedbackAsync(feedbackCreateModel.UserId);
+            if (itemToUpdate == null)
+            {
+                var feedback = new Feedback(feedbackCreateModel);
+                await _feedbackRepository.AddFeedbackAsync(feedback);
+            }
+            else
+            {
+                itemToUpdate.Description = string.IsNullOrEmpty(feedbackCreateModel.Description)
+               ? itemToUpdate.Description
+               : feedbackCreateModel.Description;
+
+
+                itemToUpdate.Rating = feedbackCreateModel.Rating < 1
+                   ? itemToUpdate.Rating
+                   : feedbackCreateModel.Rating;
+
+                await _feedbackRepository.UpdateFeedbackAsync(itemToUpdate);
+            }
         }
 
         public async Task DeleteFeedbackAsync(int id)
@@ -46,9 +63,6 @@ namespace DeratMain.Services
                 ? itemToUpdate.Description
                 : feedbackUpdateModel.Description;
 
-            itemToUpdate.AvatarUrl= string.IsNullOrEmpty(feedbackUpdateModel.AvatarUrl)
-               ? itemToUpdate.AvatarUrl
-               : feedbackUpdateModel.AvatarUrl;
 
             itemToUpdate.Rating = feedbackUpdateModel.Rating < 1
                ? itemToUpdate.Rating

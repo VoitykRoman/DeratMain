@@ -11,7 +11,6 @@ namespace DeratMain.Databases.Entities.Logic
         {
             EventText = text;
             Project = project;
-            DateTime = DateTime.Now;
         }
 
         public Event()
@@ -19,7 +18,6 @@ namespace DeratMain.Databases.Entities.Logic
 
         }
         public string EventText { get; set; }
-        public DateTime DateTime { get; set; }
         public Project Project { get; set; }
     }
 }

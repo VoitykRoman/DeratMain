@@ -23,7 +23,7 @@ namespace DeratMain.Databases.Entities
         public string FullName { get; set; }
         public string Email { get; set; }
         public virtual string Services { get; set; }
-        public string   Phone { get; set; }
+        public string Phone { get; set; }
         public DateTime DateTime { get; set; }
     }
 }

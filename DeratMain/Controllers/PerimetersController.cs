@@ -29,5 +29,28 @@ namespace DeratMain.Controllers
             await _PerimeterService.AddPerimeterAsync(ProjectCreateModel, "admin");
             return NoContent();
         }
+
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<IActionResult> GetPerimeterById(int id)
+        {
+            return Ok(await _PerimeterService.GetPerimeterById(id));
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<IActionResult> MarkAsReviewed(int id)
+        {
+            await _PerimeterService.MarkAsReviewed(id);
+            return Ok();
+        }
+
+        [Route("[action]")]
+        [HttpDelete]
+        public async Task<IActionResult> DeletePerimeter(int id)
+        {
+            await _PerimeterService.DeletePerimeter(id);
+            return Ok();
+        }
     }
 }

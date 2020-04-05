@@ -22,39 +22,47 @@ namespace DeratMain.Databases.Repositories
             await SaveChanges();
         }
 
-        public async Task DeleteUserAsync(int id)
+        public async Task<IEnumerable<User>> GetAllEmployeesAsync()
         {
-            var itemToDelete = await _dbContext.Users
-                .FirstOrDefaultAsync(l => l.Id == id);
+            return await _dbContext.Users.AsNoTracking().Where(e => !e.IsDeleted &&
+                                                     e.Role == "employee")
+                .ToListAsync();
 
-            itemToDelete.IsDeleted = true;
-            await SaveChanges();
+        }
+
+        public async Task<IEnumerable<User>> GetAllClientsAsync()
+        {
+            return await _dbContext.Users.AsNoTracking().Where(e => !e.IsDeleted &&
+                                                     e.Role == "client")
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            return await _dbContext.Users
+            return await _dbContext.Users.AsNoTracking()
                 .Where(l => !l.IsDeleted).ToListAsync();
         }
-
-        public async Task<User> GetUserAsync(int id)
-        {
-            return await _dbContext.Users
-                .FirstOrDefaultAsync(l => l.Id == id);
-        }
-
         public async Task<User> GetUserAsync(string email, string password)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+            return await _dbContext.Users.Include(e => e.Organization).AsNoTracking().FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
         }
 
-        public async Task<IEnumerable<User>> GetUsersByRole(string role)
+
+        public async Task UpdateUser()
         {
-            return await _dbContext.Users.Where(u => u.Role == role).ToListAsync();
+            await SaveChanges();
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async Task<User> GetUserById(int id)
+        {   
+            return await _dbContext.Users.FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task DeleteUser(int id)
         {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(e => e.Id == id);
+            _dbContext.Users.Remove(user);
+
             await SaveChanges();
         }
 

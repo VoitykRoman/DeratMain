@@ -45,9 +45,6 @@ namespace DeratMain.Services
                 ? itemToUpdate.Age
                 : teamMemberModel.Age;
 
-            itemToUpdate.AvatarUrl = string.IsNullOrEmpty(teamMemberModel.AvatarUrl)
-                ? itemToUpdate.AvatarUrl
-                : teamMemberModel.AvatarUrl;
 
             itemToUpdate.Experience = teamMemberModel.Experience <= 0
                 ? itemToUpdate.Experience

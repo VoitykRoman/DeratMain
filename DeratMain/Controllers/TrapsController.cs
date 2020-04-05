@@ -29,5 +29,28 @@ namespace DeratMain.Controllers
             await _TrapService.AddTrapAsync(ProjectCreateModel, "admin");
             return NoContent();
         }
+
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<IActionResult> GetTrapById(int id)
+        {
+            return Ok(await _TrapService.GetTrapById(id));
+        }
+
+        [Route("[action]")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteTrap(int id)
+        {
+            await _TrapService.DeleteTrap(id);
+            return Ok();
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<IActionResult> MarkAsReviewed(int id)
+        {
+            await _TrapService.MarkAsReviewed(id);
+            return Ok();
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace DeratMain.Databases.Configuration
         public override void Configure(EntityTypeBuilder<TeamMember> builder)
         {
             base.Configure(builder);
-            builder.Property(e => e.Name).HasMaxLength(20).IsRequired();
+            builder.Property(e => e.Name).IsRequired();
             builder.Property(e => e.Position).IsRequired();
         }
     }

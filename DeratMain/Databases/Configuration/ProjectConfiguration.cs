@@ -10,7 +10,7 @@ namespace DeratMain.Databases.Configuration
         {
             base.Configure(builder);
             builder.HasOne(e => e.Organization).WithMany(o => o.Projects);
-            builder.HasMany(e => e.Events).WithOne(o => o.Project);
+            builder.HasMany(e => e.Events).WithOne(o => o.Project).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

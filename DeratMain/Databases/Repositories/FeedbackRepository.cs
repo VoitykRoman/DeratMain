@@ -29,20 +29,20 @@ namespace DeratMain.Databases.Repositories
             var itemToDelete = await _dbContext.Feedbacks
                 .FirstOrDefaultAsync(l => l.Id == id);
 
-            itemToDelete.IsDeleted = true;
+            _dbContext.Feedbacks.Remove(itemToDelete);
             await SaveChanges();
         }
 
         public async Task<IEnumerable<Feedback>> GetAllFeedbacksAsync()
         {
             return await _dbContext.Feedbacks
+                .AsNoTracking()
                 .Where(l => !l.IsDeleted).ToListAsync();
         }
 
         public async Task<Feedback> GetFeedbackAsync(int id)
         {
-            return await _dbContext.Feedbacks
-                .FirstOrDefaultAsync(l => l.Id == id);
+            return await _dbContext.Feedbacks.FirstOrDefaultAsync(e => e.UserId == id);
         }
 
         public async Task UpdateFeedbackAsync(Feedback feedback)

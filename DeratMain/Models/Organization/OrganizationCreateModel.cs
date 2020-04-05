@@ -5,6 +5,7 @@ namespace DeratMain.Models.Project
     public class OrganizationCreateModel
     {
         public string Name { get; set; }
+        public string AvatarUrl { get; set; }
         public ICollection<int> Clients { get; set; }
     }
 }

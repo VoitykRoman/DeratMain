@@ -32,41 +32,42 @@ namespace DeratMain.Controllers
             return NoContent();
         }
 
-        [Route("[controller]/[action]/{id}")]
-        [HttpPut]
-        public async Task<IActionResult> UpdateUser([FromBody]UserUpdateModel UserUpdateModel, int id)
-        {
-            await _UserService.UpdateUserAsync(UserUpdateModel, id);
-            return NoContent();
-        }
-
-        [Route("[controller]/[action]/{id}")]
-        [HttpDelete]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            await _UserService.DeleteUserAsync(id);
-            return NoContent();
-        }
-
-        [Route("[controller]/[action]/{id}")]
-        [HttpGet]
-        public async Task<IActionResult> GetUserById(int id)
-        {
-            return Ok(await _UserService.GetUserAsync(id));
-        }
-
-        [Route("[controller]/[action]")]
-        [HttpGet]
-        public async Task<IActionResult> GetUsersByRole(string role)
-        {
-            return Ok(await _UserService.GetUsersByRole(role));
-        }
-
         [Route("[controller]/[action]")]
         [HttpGet]
         public async Task<IActionResult> GetUser(string email, string password)
         {
             return Ok(await _UserService.GetUserAsync(email, password));
         }
+
+        [Route("[controller]/[action]")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllEmployees()
+        {
+            return Ok(await _UserService.GetAllEmployeesAsync());
+        }
+
+        [Route("[controller]/[action]")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllClients()
+        {
+            return Ok(await _UserService.GetAllClientsAsync());
+        }
+
+        [Route("[controller]/[action]")]
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(UserUpdateModel userUpdateModel)
+        {
+            await _UserService.UpdateUser(userUpdateModel);
+            return Ok();
+        }
+
+        [Route("[controller]/[action]")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            await _UserService.DeleteUser(id);
+            return Ok();
+        }
+
     }
 }

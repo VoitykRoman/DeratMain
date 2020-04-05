@@ -10,5 +10,13 @@ namespace DeratMain.Interfaces.Databases
         Task<IEnumerable<Trap>> GetAllTrapsAsync();
 
         Task AddTrapAsync(Trap Trap, TrapCreateModel TrapCreateModel);
+
+        Task UpdateTrapsAsync();
+
+        Task<Trap> GetTrapById(int id);
+
+        Task DeleteTrap(int id);
+
+        Task MarkAsReviewed(int id);
     }
 }

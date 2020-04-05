@@ -39,7 +39,7 @@ namespace DeratMain.Databases.Repositories
 
         public async Task<IEnumerable<TeamMember>> GetAllTeamMembersAsync()
         {
-            return await _dbContext.TeamMembers.Where(t => !t.IsDeleted).ToListAsync();
+            return await _dbContext.TeamMembers.AsNoTracking().Where(t => !t.IsDeleted).ToListAsync();
         }
 
         public async Task<TeamMember> GetTeamMemberAsync(int id)

@@ -14,7 +14,10 @@ namespace DeratMain.Databases.Entities.Logic
             CreatedBy = name;
             LastReviewTime = CreatedAt;
             NextReviewTime = LastReviewTime.AddDays(trapCreateModel.ReviewEveryDays);
-            EndTime = CreatedAt.AddDays(trapCreateModel.LifeInDays);
+
+            if (trapCreateModel.EndDate < DateTime.Now)
+                throw new Exception();
+            EndTime = trapCreateModel.EndDate;
         }
 
         public Trap() : base()
@@ -26,6 +29,7 @@ namespace DeratMain.Databases.Entities.Logic
         public DateTime EndTime { get; set; }
         public DateTime LastReviewTime { get; set; }
         public DateTime NextReviewTime { get; set; }
+        public int ReviewEveryDays { get; set; }
         public string Comment { get; set; }
         public string Place { get; set; }
         public Perimeter Perimeter { get; set; }
@@ -42,6 +46,5 @@ namespace DeratMain.Databases.Entities.Logic
     {
         public static string Ok = "ok";
         public static string Overdue = "overdue";
-        public static string Closed = "closed";
     }
 }

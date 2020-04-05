@@ -10,5 +10,14 @@ namespace DeratMain.Interfaces.Databases
         Task<IEnumerable<Perimeter>> GetAllPerimetersAsync();
 
         Task AddPerimeterAsync(Perimeter Perimeter, PerimeterCreateModel PerimeterCreateModel);
+
+        Task<Perimeter> GetPerimeterById(int id);
+
+        Task SaveChanges();
+
+        Task MarkAsReviewed(int id);
+
+        Task DeletePerimeter(int id);
+
     }
 }

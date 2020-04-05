@@ -36,6 +36,7 @@ namespace DeratMain.Databases.Repositories
         public async Task<IEnumerable<License>> GetAllLicensesAsync()
         {
             return await _dbContext.Licenses
+                .AsNoTracking()
                 .Where(l => !l.IsDeleted).ToListAsync();
         }
 

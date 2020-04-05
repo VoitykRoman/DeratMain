@@ -11,7 +11,6 @@ namespace DeratMain.Databases.Entities
             Position = teamMemberCreateModel.Position;
             Phone = teamMemberCreateModel.Phone;
             Experience = teamMemberCreateModel.Experience;
-            AvatarUrl = teamMemberCreateModel.AvatarUrl;
             ImageUrl = teamMemberCreateModel.ImageUrl;
         }
 
@@ -23,7 +22,6 @@ namespace DeratMain.Databases.Entities
         public string Position { get; set; }
         public string Phone { get; set; }
         public int Experience { get; set; }
-        public string AvatarUrl { get; set; }
         public string ImageUrl { get; set; }
 
     }

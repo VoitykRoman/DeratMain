@@ -55,7 +55,10 @@ namespace DeratMain.Authentication
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Phone = user.Phone,
-                Role = user.Role
+                Role = user.Role,
+                Id = user.Id,
+                Password = user.Password,
+                AvatarUrl = user.AvatarUrl
             };
         }
 

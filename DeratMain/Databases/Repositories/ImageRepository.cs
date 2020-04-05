@@ -30,20 +30,22 @@ namespace DeratMain.Databases.Repositories
             {
                 throw new Exception("Index image doesnt exist");
             }
-            item.IsDeleted = true;
+            _dbContext.IndexImages.Remove(item);
             await SaveChanges();
         }
 
         public async Task<IEnumerable<IndexImage>> GetAllImagesAsync()
         {
-            return await _dbContext.IndexImages.Where(i => !i.IsDeleted)
+            return await _dbContext.IndexImages
+                .AsNoTracking()
+                .Where(i => !i.IsDeleted)
                 .ToListAsync();
         }
 
         public async Task<IndexImage> GetIndexImageAsync(int id)
         {
-            return await _dbContext.IndexImages.
-                FirstOrDefaultAsync(i => i.Id == id);
+            return await _dbContext.IndexImages
+                .FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task UpdateImageAsync(IndexImage image)

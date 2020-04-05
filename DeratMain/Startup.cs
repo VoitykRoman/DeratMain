@@ -96,7 +96,8 @@ namespace DeratMain
             services.AddScoped<IFacilityService, FacilityService>();
             services.AddScoped<IPerimeterService, PerimeterService>();
             services.AddScoped<ITrapService, TrapService>();
-
+            services.AddScoped<IEmailService, EmailService>();
+            
             services.AddScoped<IIdentityService, IdentityService>();
 
             services.AddSwaggerGen(c =>

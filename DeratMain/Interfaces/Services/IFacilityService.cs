@@ -10,5 +10,9 @@ namespace DeratMain.Interfaces.Services
         Task<IEnumerable<Facility>> GetAllFacilitiesAsync();
 
         Task AddFacilityAsync(FacilityCreateModel Facility, string name);
+
+        Task<Facility> GetFacilityById(int id, int userId);
+
+        Task DeleteFacility(int id);
     }
 }

@@ -10,7 +10,7 @@ namespace DeratMain.Models.Project
     {
         public string Name { get; set; }
         public ICollection<string> Services { get; set; }
-        public Organization Organization { get; set; }
+        public DeratMain.Databases.Entities.Logic.Organization Organization { get; set; }
         public ICollection<DeratMain.Databases.Entities.User> Employees { get; set; }
         public string Status { get; set; }
     }

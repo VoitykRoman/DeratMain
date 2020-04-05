@@ -25,5 +25,15 @@ namespace DeratMain.Services
         {
             return await _FacilityRepository.GetAllFacilitiesAsync();
         }
+
+        public async Task<Facility> GetFacilityById(int id, int userId)
+        {
+            return await _FacilityRepository.GetFacilityById(id, userId);
+        }
+
+        public async Task DeleteFacility(int id)
+        {
+            await _FacilityRepository.DeleteFacility(id);
+        }
     }
 }

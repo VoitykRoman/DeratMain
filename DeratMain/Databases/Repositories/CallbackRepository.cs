@@ -36,12 +36,14 @@ namespace DeratMain.Databases.Repositories
         public async Task<IEnumerable<Callback>> GetAllCallbacksAsync()
         {
             return await _dbContext.Callbacks
+                .AsNoTracking()
                 .Where(l => !l.IsDeleted).ToListAsync();
         }
 
         public async Task<Callback> GetCallbackAsync(int id)
         {
             return await _dbContext.Callbacks
+                .AsNoTracking()
                 .FirstOrDefaultAsync(l => l.Id == id);
         }
 

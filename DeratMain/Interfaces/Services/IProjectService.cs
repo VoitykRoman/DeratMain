@@ -8,8 +8,18 @@ namespace DeratMain.Interfaces.Services
 {
     public interface IProjectService
     {
-        Task<IEnumerable<Project>> GetAllProjectsAsync();
+        Task<IEnumerable<Project>> GetAllProjectsAsync(int id);
 
         Task AddProjectAsync(ProjectCreateModel project, string name);
+
+        Task ChangeProjectStatus(int id, string status);
+
+        Task<Project> GetProjectById(int id);
+
+        Task RemoveEmployeeFromProject(int employeeId, int projectId);
+
+        Task AddEmployeeToProject(IEnumerable<int> employeeIds, int projectId);
+
+        Task DeleteProject(int id);
     }
 }

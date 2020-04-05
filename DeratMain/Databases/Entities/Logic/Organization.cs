@@ -12,6 +12,7 @@ namespace DeratMain.Databases.Entities.Logic
         {
             Name = organizationCreateModel.Name;
             CreatedBy = name;
+            AvatarUrl = organizationCreateModel.AvatarUrl;
         }
 
         public Organization() : base()
@@ -19,9 +20,10 @@ namespace DeratMain.Databases.Entities.Logic
         }
 
         public string Name { get; set; }
-        public ICollection<Facility> Facilities { get; set; }
-        public ICollection<User> Clients { get; set; }
-        public ICollection<Project> Projects { get; set; }
+        public ICollection<Facility> Facilities { get; set; } = new List<Facility>();
+        public ICollection<User> Clients { get; set; } = new List<User>();
+        public ICollection<Project> Projects { get; set; } = new List<Project>();
+        public string AvatarUrl { get; set; }
 
     }
 }

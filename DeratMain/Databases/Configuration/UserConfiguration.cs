@@ -11,6 +11,10 @@ namespace DeratMain.Databases.Configuration
             base.Configure(builder);
             builder.Property(e => e.Email).IsRequired();
 
+            builder.HasMany(e => e.Perimeters).WithOne(e => e.Employee);
+            builder.HasOne(e => e.Organization).WithMany(e => e.Clients);
+            builder.HasMany(e => e.Traps).WithOne(e => e.Employee);
+            builder.HasOne(e => e.Feedback).WithOne(e => e.User).HasForeignKey<Feedback>(e => e.UserId);
         }
     }
 }

@@ -29,9 +29,11 @@ namespace DeratMain.Databases.Entities
         public string FirstName{ get;  set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
+        public string AvatarUrl { get; set; }
         public Organization Organization { get; set; }
-        public ICollection<EmployeeProject> Projects { get; set; } = new List<EmployeeProject>();
+        public ICollection<EmployeeProject> ProjectsLnk { get; set; } = new List<EmployeeProject>();
+        public ICollection<Perimeter> Perimeters { get; set; } = new List<Perimeter>();
+        public ICollection<Trap> Traps { get; set; } = new List<Trap>();
+        public Feedback Feedback { get; set; }
     }
-
-    
 }

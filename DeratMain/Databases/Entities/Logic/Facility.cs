@@ -20,7 +20,7 @@ namespace DeratMain.Databases.Entities.Logic
         }
         public string Name { get; set; }
         public string Address { get; set; }
-        public ICollection<Perimeter> Perimeters { get; set; }
+        public ICollection<Perimeter> Perimeters { get; set; } = new List<Perimeter>();
         public Organization Organization { get; set; }
     }
 }

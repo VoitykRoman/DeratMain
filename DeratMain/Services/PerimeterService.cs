@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DeratMain.Databases.Entities.Logic;
 using DeratMain.Models.Project;
+using System;
 
 namespace DeratMain.Services
 {
@@ -23,8 +24,64 @@ namespace DeratMain.Services
 
         public async Task<IEnumerable<Perimeter>> GetAllPerimetersAsync()
         {
-            return await _PerimeterRepository.GetAllPerimetersAsync();
+           var perimeters = await _PerimeterRepository.GetAllPerimetersAsync();
+            foreach (var perimeter in perimeters)
+            {
+                foreach (var trap in perimeter.Traps)
+                {
+                    if (trap.NextReviewTime > trap.EndTime)
+                    {
+                        trap.NextReviewTime = trap.EndTime;
+                    }
+                    if (trap.NextReviewTime > DateTime.Now)
+                    {
+                        trap.Status = "ok";
+                    }
+                    else
+                    {
+                        trap.Status = "overdue";
+                    }
+
+             
+                }
+            }
+            await _PerimeterRepository.SaveChanges();
+            return perimeters;
+            
         }
 
+        public async Task<Perimeter> GetPerimeterById(int id)
+        {
+            var perimeter =  await _PerimeterRepository.GetPerimeterById(id);
+            foreach (var trap in perimeter.Traps)
+            {
+                if (trap.NextReviewTime > trap.EndTime)
+                {
+                    trap.NextReviewTime = trap.EndTime;
+                }
+                if (trap.NextReviewTime > DateTime.Now)
+                {
+                    trap.Status = "ok";
+                }
+                else
+                {
+                    trap.Status = "overdue";
+                }
+
+              
+            }
+            await _PerimeterRepository.SaveChanges();
+            return perimeter;
+        }
+
+        public async Task MarkAsReviewed(int id)
+        {
+            await _PerimeterRepository.MarkAsReviewed(id);
+        }
+
+        public async Task DeletePerimeter(int id)
+        {
+            await _PerimeterRepository.DeletePerimeter(id);
+        }
     }
 }

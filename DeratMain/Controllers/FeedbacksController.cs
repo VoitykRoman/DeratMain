@@ -44,7 +44,7 @@ namespace DeratMain.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetItem(int id)
+        public async Task<IActionResult> GetFeedbackByUserId(int id)
         {
             return Ok(await _feedbackService.GetFeedbackAsync(id));
         }

@@ -2,6 +2,7 @@
 using DeratMain.Databases.Entities;
 using DeratMain.Databases.Entities.Logic;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace DeratMain.Databases
 {
@@ -24,9 +25,14 @@ namespace DeratMain.Databases
         {
         }
 
-        public MainDbContext()
+        public  MainDbContext()
         {
-            Database.EnsureCreated();
+            Database.EnsureCreated();   
+            if(!Users.Any(e => e.Role=="admin" && e.Email =="admin" && e.Password =="admin"))
+            {
+                Users.Add(new User() { Role = "admin", Email = "admin", Password = "admin" });
+            }
+            SaveChanges();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,6 +53,15 @@ namespace DeratMain.Databases
             var entity = modelBuilder.Entity<EmployeeProject>();
             entity.HasKey(e => new { e.ProjectId, e.EmployeeId });
 
+            modelBuilder.Entity<EmployeeProject>()
+            .HasOne(sc => sc.Employee)
+            .WithMany(s => s.ProjectsLnk)
+            .HasForeignKey(sc => sc.EmployeeId);
+
+            modelBuilder.Entity<EmployeeProject>()
+           .HasOne(sc => sc.Project)
+           .WithMany(c => c.EmployeesLnk)
+           .HasForeignKey(sc => sc.ProjectId);
         }
     }
 }

@@ -23,9 +23,14 @@ namespace DeratMain.Services
             await _UserRepository.AddUserAsync(User);
         }
 
-        public async Task DeleteUserAsync(int id)
+        public async Task<IEnumerable<User>> GetAllEmployeesAsync()
         {
-            await _UserRepository.DeleteUserAsync(id);
+            return await _UserRepository.GetAllEmployeesAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetAllClientsAsync()
+        {
+            return await _UserRepository.GetAllClientsAsync();
         }
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
@@ -33,52 +38,45 @@ namespace DeratMain.Services
             return await _UserRepository.GetAllUsersAsync();
         }
 
-        public async Task<User> GetUserAsync(int id)
-        {
-            return await _UserRepository.GetUserAsync(id);
-        }
-
         public async Task<User> GetUserAsync(string email, string password)
         {
             return await _UserRepository.GetUserAsync(email, password);
         }
 
-        public async Task<IEnumerable<User>> GetUsersByRole(string role)
+        public async Task UpdateUser(UserUpdateModel userUpdateModel)
         {
-            return await _UserRepository.GetUsersByRole(role);
+            var userToUpdate = await _UserRepository.GetUserById(userUpdateModel.UserId);
+
+            userToUpdate.Email = string.IsNullOrEmpty(userUpdateModel.Email)
+                ? userToUpdate.Email
+                : userUpdateModel.Email;
+
+            userToUpdate.FirstName = string.IsNullOrEmpty(userUpdateModel.FirstName)
+    ? userToUpdate.FirstName
+    : userUpdateModel.FirstName;
+
+            userToUpdate.LastName = string.IsNullOrEmpty(userUpdateModel.LastName)
+    ? userToUpdate.LastName
+    : userUpdateModel.LastName;
+
+            userToUpdate.Password = string.IsNullOrEmpty(userUpdateModel.Password)
+    ? userToUpdate.Password
+    : userUpdateModel.Password;
+
+            userToUpdate.Phone = string.IsNullOrEmpty(userUpdateModel.Phone)
+    ? userToUpdate.Phone
+    : userUpdateModel.Phone;
+
+            userToUpdate.AvatarUrl = string.IsNullOrEmpty(userUpdateModel.AvatarUrl)
+? userToUpdate.AvatarUrl
+: userUpdateModel.AvatarUrl;
+
+            await _UserRepository.UpdateUser();
         }
 
-        public async Task UpdateUserAsync(UserUpdateModel UserUpdateModel, int id)
+        public async Task DeleteUser(int id)
         {
-            var itemToUpdate = await _UserRepository
-                .GetUserAsync(id);
-
-            itemToUpdate.Email = string.IsNullOrEmpty(UserUpdateModel.Email)
-                ? itemToUpdate.Email
-                : UserUpdateModel.Email;
-
-            itemToUpdate.Password = string.IsNullOrEmpty(UserUpdateModel.Password)
-               ? itemToUpdate.Password
-               : UserUpdateModel.Password;
-
-            itemToUpdate.Role = string.IsNullOrEmpty(UserUpdateModel.Role)
-               ? itemToUpdate.Role
-               : UserUpdateModel.Role;
-
-            itemToUpdate.FirstName = string.IsNullOrEmpty(UserUpdateModel.FirstName)
-   ? itemToUpdate.FirstName
-   : UserUpdateModel.FirstName;
-
-            itemToUpdate.LastName = string.IsNullOrEmpty(UserUpdateModel.LastName)
-   ? itemToUpdate.LastName
-   : UserUpdateModel.LastName;
-
-
-            itemToUpdate.Phone = string.IsNullOrEmpty(UserUpdateModel.Phone)
-? itemToUpdate.Phone
-: UserUpdateModel.Phone;
-
-            await _UserRepository.UpdateUserAsync(itemToUpdate);
+            await _UserRepository.DeleteUser(id);
         }
     }
 }
