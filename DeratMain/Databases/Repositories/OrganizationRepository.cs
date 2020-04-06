@@ -105,14 +105,20 @@ namespace DeratMain.Databases.Repositories
 
         public async Task DeleteOrganization(int id)
         {
-            var org = await _dbContext.Organizations.Include(e => e.Clients).FirstOrDefaultAsync(e => e.Id == id);
-            org.IsDeleted = true;
+            var org = await _dbContext.Organizations.Include(e => e.Projects).Include(e => e.Clients).FirstOrDefaultAsync(e => e.Id == id);
+            
 
             foreach (var client in org.Clients)
             {
                 client.Organization = null;
             }
-            
+
+            foreach (var pr in org.Projects)
+            {
+                pr.Organization = null;
+            }
+            org.Projects = null;
+            _dbContext.Organizations.Remove(org);
             await SaveChanges();
         }
         private async Task SaveChanges()

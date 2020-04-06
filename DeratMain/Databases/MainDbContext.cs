@@ -23,6 +23,7 @@ namespace DeratMain.Databases
         public virtual DbSet<EmployeeProject> EmployeeProjects { get; set; }
         public MainDbContext(DbContextOptions<MainDbContext> options) : base(options)
         {
+           
         }
 
         public  MainDbContext()

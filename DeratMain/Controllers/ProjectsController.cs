@@ -27,7 +27,7 @@ namespace DeratMain.Controllers
         public async Task<IActionResult> Post(ProjectCreateModel ProjectCreateModel)
         {
             await _ProjectService.AddProjectAsync(ProjectCreateModel, "admin");
-            return NoContent();
+            return Ok();
         }
 
         [Route("[action]")]

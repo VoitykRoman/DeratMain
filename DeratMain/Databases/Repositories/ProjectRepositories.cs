@@ -3,6 +3,7 @@ using DeratMain.Databases.Entities.Logic;
 using DeratMain.Interfaces.Databases;
 using DeratMain.Models.Project;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +22,13 @@ namespace DeratMain.Databases.Repositories
         public async Task AddProjectAsync(Project project, ProjectCreateModel ProjectCreateModel)
         {
             _dbContext.Projects.Add(project);
+            project.Organization = await _dbContext.Organizations.FirstOrDefaultAsync(e => e.Id == ProjectCreateModel.OrganizationId);
+            foreach (var emp in ProjectCreateModel.Employees)
+            {
+                var employee = await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(e => e.Id == emp);
+                project.Events.Add(new Event($"The employee {employee.FirstName} {employee.LastName} has been added to project at {DateTime.Now}", project));
+            }
+            
             await SaveChanges();
 
             foreach (var e in ProjectCreateModel.Employees)
@@ -68,7 +76,7 @@ namespace DeratMain.Databases.Repositories
             var project = await _dbContext.Projects.FirstOrDefaultAsync(e => e.Id == id);
 
             project.Status = status;
-
+            project.Events.Add(new Event($"The status of the project has been changed to {status} at {DateTime.Now}", project));
             await SaveChanges();
         }
 
@@ -93,6 +101,8 @@ namespace DeratMain.Databases.Repositories
         {
             var project = await _dbContext.Projects.Include(w => w.EmployeesLnk)
                 .FirstOrDefaultAsync(e => e.Id == projectId);
+            var employee = await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(e => e.Id == employeeId);
+            project.Events.Add(new Event($" The employee {employee.FirstName} {employee.LastName} has been removed from project at {DateTime.Now}", project));
             var lnk = project.EmployeesLnk
                 .FirstOrDefault(e => e.EmployeeId == employeeId && e.ProjectId == projectId);
             project.EmployeesLnk.Remove(lnk);
@@ -104,7 +114,11 @@ namespace DeratMain.Databases.Repositories
             var project = await _dbContext.Projects
                .Include(w => w.EmployeesLnk)
                .FirstOrDefaultAsync(e => e.Id == projectId);
-
+            foreach (var emp in employeeIds)
+            {
+                var employee = await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(e => e.Id == emp);
+                project.Events.Add(new Event($"The employee {employee.FirstName} {employee.LastName} has been added to project at {DateTime.Now}", project));
+            }
             foreach (var employeeId in employeeIds)
             {
                 project.EmployeesLnk.Add(new EmployeeProject { EmployeeId = employeeId, ProjectId = projectId });
