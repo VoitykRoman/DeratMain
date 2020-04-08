@@ -1,11 +1,13 @@
 ﻿using DeratMain.Interfaces.Services;
 using DeratMain.Models.Callback;
 using DeratMain.Models.License;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace DeratMain.Controllers
 {
+   
     [Route("[controller]")]
     [ApiController]
     public class CallbacksController : ControllerBase

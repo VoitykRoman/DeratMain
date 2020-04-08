@@ -58,11 +58,12 @@ namespace DeratMain.Databases.Repositories
                    .ThenInclude(t => t.Employee)
                    .Include(q => q.Events)
                    .AsNoTracking()
+                   .OrderByDescending(e => e.CreatedAt)
                    .ToListAsync();
             }
             else
             {
-                var projects = user.ProjectsLnk.Select(e => e.Project).ToList();
+                var projects = user.ProjectsLnk.Select(e => e.Project).OrderByDescending(e => e.CreatedAt).ToList();
                 return projects;
             }
 

@@ -50,7 +50,7 @@ namespace DeratMain.Databases.Repositories
             }
             else
             {
-                var facility = await _dbContext.Facilities.AsNoTracking().Include(e => e.Organization).FirstOrDefaultAsync(e => e.Id == id);
+                facility.Perimeters = await _dbContext.Perimeters.AsNoTracking().Include(ee => ee.Employee).Include(e => e.Facility).Where(e => e.Employee.Id == user.Id && e.Facility.Id == id).ToListAsync();
                 facility.Perimeters = await _dbContext.Perimeters.AsNoTracking().Include(ee => ee.Employee).Where(e => e.Employee.Id == user.Id).ToListAsync();
                 return facility;
             }

@@ -1,5 +1,6 @@
 ﻿using DeratMain.Interfaces.Services;
 using DeratMain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
