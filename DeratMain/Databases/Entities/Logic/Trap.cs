@@ -14,6 +14,7 @@ namespace DeratMain.Databases.Entities.Logic
             CreatedBy = name;
             LastReviewTime = CreatedAt;
             NextReviewTime = LastReviewTime.AddDays(trapCreateModel.ReviewEveryDays);
+            ReviewEveryDays = trapCreateModel.ReviewEveryDays;
 
             if (trapCreateModel.EndDate < DateTime.Now)
                 throw new Exception();
